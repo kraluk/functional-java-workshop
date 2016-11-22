@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'application'
+    id 'idea'
+    id 'jacoco'
+}
+
+// Project settings
+group = 'com.kraluk.workshop.functional'
+version = '0.1.0-SNAPSHOT'
+
+mainClassName = 'com.kraluk.workshop.functional.Application'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Functional Java Workshop',
+                'Implementation-Version': version,
+                'Main-Class': mainClassName
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled = true
+    }
+}
+
+// Java version
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+
+    // Logger
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.7'
+
+    // Lambdas & Streams
+    compile ('com.aol.simplereact:cyclops-react:1.0.2') {
+        exclude group: 'org.slf4j'
+    }
+    compile group: 'io.javaslang', name: 'javaslang', version: '2.0.4'
+
+    // Test dependencies
+    testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.7'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4-rc-3'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
+
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2'
+}
