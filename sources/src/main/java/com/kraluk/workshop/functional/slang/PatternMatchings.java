@@ -27,8 +27,8 @@ import static javaslang.Predicates.isIn;
  *
  * @author lukasz
  */
-public class PatternMatching {
-    private static final Logger log = LoggerFactory.getLogger(PatternMatching.class);
+public class PatternMatchings {
+    private static final Logger log = LoggerFactory.getLogger(PatternMatchings.class);
 
     public static Result simpleMatching(int index) {
         return Match(index).of(
