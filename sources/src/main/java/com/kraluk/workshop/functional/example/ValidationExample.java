@@ -1,0 +1,81 @@
+package com.kraluk.workshop.functional.example;
+
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Arrays;
+
+import javaslang.collection.CharSeq;
+import javaslang.collection.List;
+import javaslang.control.Validation;
+
+/**
+ * Validation Examples
+ *
+ * @author lukasz
+ */
+@Slf4j
+public class ValidationExample {
+
+    public static void checkValidPerson() {
+        PersonValidator personValidator = new PersonValidator();
+
+        Validation<List<String>, Person>
+            valid =
+            personValidator.validatePerson("Leszke Smieszke", 42);
+        log.info("{}", valid.get());
+    }
+
+    public static void checkInvalidPerson() {
+        PersonValidator personValidator = new PersonValidator();
+
+        Validation<List<String>, Person>
+            invalid =
+            personValidator.validatePerson("Justynian Bimber", -1);
+        //log.info("{}", invalid.get());
+        log.info("{}", Arrays.toString(invalid.getError().toJavaArray()));
+    }
+
+    public static void main(String[] args) {
+        checkValidPerson();
+        checkInvalidPerson();
+    }
+}
+
+class PersonValidator {
+
+    private static final String VALID_NAME_CHARS = "[a-zA-Z ]";
+    private static final int MIN_AGE = 18;
+
+    public Validation<List<String>, Person> validatePerson(String name, int age) {
+        return Validation.combine(validateName(name), validateAge(age)).ap(Person::new);
+    }
+
+    private Validation<String, String> validateName(String name) {
+        return CharSeq.of(name).replaceAll(VALID_NAME_CHARS, "").transform(seq -> seq.isEmpty()
+            ? Validation.valid(name)
+            : Validation.invalid("Name contains invalid characters: '"
+                + seq.distinct().sorted() + "'"));
+    }
+
+    private Validation<String, Integer> validateAge(int age) {
+        return age < MIN_AGE
+            ? Validation.invalid("Age must be greater than " + MIN_AGE)
+            : Validation.valid(age);
+    }
+}
+
+class Person {
+
+    public final String name;
+    public final int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person(" + name + ", " + age + ")";
+    }
+}

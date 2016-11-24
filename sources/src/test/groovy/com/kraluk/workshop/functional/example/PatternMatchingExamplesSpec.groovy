@@ -1,4 +1,4 @@
-package com.kraluk.workshop.functional.slang
+package com.kraluk.workshop.functional.example
 
 import javaslang.MatchError
 import javaslang.control.Option
@@ -8,11 +8,11 @@ import java.time.Instant
 
 import static com.kraluk.workshop.functional.core.enums.Result.*
 
-class PatternMatchingsSpec extends Specification {
+class PatternMatchingExamplesSpec extends Specification {
 
     def "should do a simple matching"() {
         when:
-            def result = PatternMatchings.simpleMatching(index)
+            def result = PatternMatchingExamples.simpleMatching(index)
 
         then:
             result == expected
@@ -28,7 +28,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should throw an exception when invoking Match without \$()"() {
         when:
-            PatternMatchings.simpleMatchingWithoutDefault(5)
+            PatternMatchingExamples.simpleMatchingWithoutDefault(5)
 
         then:
             thrown MatchError
@@ -36,7 +36,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should do a simple matching with JavaSlang's Option"() {
         when:
-            def result = PatternMatchings.simpleMatchingWithOption(index)
+            def result = PatternMatchingExamples.simpleMatchingWithOption(index)
 
         then:
             result.get() == expected
@@ -49,7 +49,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should do a simple matching with JavaSlang's Option when unexpected index is given"() {
         when:
-            def result = PatternMatchings.simpleMatchingWithOption(index as int)
+            def result = PatternMatchingExamples.simpleMatchingWithOption(index as int)
 
         then:
             result == expected
@@ -62,7 +62,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should do a simple matching with a predicate"() {
         when:
-            def result = PatternMatchings.simpleMatchingWithPredicate(index)
+            def result = PatternMatchingExamples.simpleMatchingWithPredicate(index)
 
         then:
             result == expected
@@ -76,7 +76,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should do a simple matching with a complex predicate"() {
         when:
-            def result = PatternMatchings.simpleMatchingWithComplexPredicate(index)
+            def result = PatternMatchingExamples.simpleMatchingWithComplexPredicate(index)
 
         then:
             result == expected
@@ -94,7 +94,7 @@ class PatternMatchingsSpec extends Specification {
 
     def "should do a simple matching with a value"() {
         when:
-            def result = PatternMatchings.simpleMatchingWithValue(index)
+            def result = PatternMatchingExamples.simpleMatchingWithValue(index)
 
         then:
             result == expected
@@ -112,7 +112,7 @@ class PatternMatchingsSpec extends Specification {
             System.setOut(new PrintStream(outStream));
 
         when:
-            PatternMatchings.simpleMatchingWithWork(index)
+            PatternMatchingExamples.simpleMatchingWithWork(index)
 
         then:
             outStream.toString() == expected
