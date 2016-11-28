@@ -2,8 +2,6 @@ package com.kraluk.workshop.functional.example;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-
 /**
  * Extended Collections Examples
  *
@@ -28,14 +26,5 @@ public class ExtendedCollectionExamples {
         }
 
         return doubles;
-    }
-
-    public static void main(String[] args) {
-        log.info("{}",
-            Arrays.toString(filterValues(1, 4, 5, 77, 22, 444, 56, 77, 88, 99).toArray()));
-
-        java.util.List<Double> doubles = getSomeRandomDoubles();
-        log.info("{}", Arrays.toString(doubles.toArray()));
-        log.info("{}", doubles.size());
     }
 }

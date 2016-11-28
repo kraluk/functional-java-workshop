@@ -15,10 +15,8 @@ public class LazyExamples {
     public static Double ofLazy() {
         Lazy<Double> lazy = Lazy.of(Math::random);
 
-        log.info("{}", lazy.isEvaluated()); // = false
-        log.info("{}", lazy.get());         // = random generated value
-        log.info("{}", lazy.isEvaluated()); // = false
-        log.info("{}", lazy.get());         // = memoized value
+        log.info("{}", lazy.isEvaluated());
+        log.info("{}", lazy.get());
 
         return lazy.get();
     }
