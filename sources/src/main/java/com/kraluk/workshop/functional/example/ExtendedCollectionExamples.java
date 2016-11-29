@@ -1,14 +1,15 @@
 package com.kraluk.workshop.functional.example;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Extended Collections Examples
  *
  * @author lukasz
  */
-@Slf4j
 public class ExtendedCollectionExamples {
+    private static final Logger log = LoggerFactory.getLogger(ExtendedCollectionExamples.class);
 
     public static java.util.List<Integer> filterValues(int... ints) {
         return javaslang.collection.List.ofAll(ints)

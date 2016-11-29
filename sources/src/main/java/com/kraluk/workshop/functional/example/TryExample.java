@@ -3,6 +3,9 @@ package com.kraluk.workshop.functional.example;
 import com.kraluk.workshop.functional.core.enums.Result;
 import com.kraluk.workshop.functional.core.exception.WorkshopException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileNotFoundException;
 
 import javaslang.control.Try;
@@ -20,6 +23,7 @@ import static javaslang.Predicates.instanceOf;
  * @author lukasz
  */
 public class TryExample {
+    private static final Logger log = LoggerFactory.getLogger(TryExample.class);
 
     public static Result tryWithResult() {
         return Try.of(TryExample::someWork)
