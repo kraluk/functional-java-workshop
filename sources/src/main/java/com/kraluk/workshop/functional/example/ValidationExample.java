@@ -1,6 +1,7 @@
 package com.kraluk.workshop.functional.example;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -13,8 +14,8 @@ import javaslang.control.Validation;
  *
  * @author lukasz
  */
-@Slf4j
 public class ValidationExample {
+    private static final Logger log = LoggerFactory.getLogger(ValidationExample.class);
 
     public static void checkValidPerson() {
         PersonValidator personValidator = new PersonValidator();

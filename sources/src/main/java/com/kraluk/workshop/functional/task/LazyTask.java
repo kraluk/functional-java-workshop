@@ -1,12 +1,12 @@
 package com.kraluk.workshop.functional.task;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.function.Supplier;
 
 import javaslang.Function4;
-import javaslang.Function5;
 import javaslang.Lazy;
 
 /**
@@ -14,8 +14,8 @@ import javaslang.Lazy;
  *
  * @author lukasz
  */
-@Slf4j
 public class LazyTask {
+    private static final Logger log = LoggerFactory.getLogger(LazyTask.class);
 
     public static Lazy<Double> calculate(Double x, Double a, Double b, Double c) {
         return Lazy

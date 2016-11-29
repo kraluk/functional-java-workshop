@@ -3,7 +3,8 @@ package com.kraluk.workshop.functional.example;
 import com.kraluk.workshop.functional.core.enums.Result;
 import com.kraluk.workshop.functional.core.exception.WorkshopException;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.util.Collections;
@@ -22,8 +23,8 @@ import static javaslang.Predicates.instanceOf;
  *
  * @author lukasz
  */
-@Slf4j
 public class TryExample {
+    private static final Logger log = LoggerFactory.getLogger(TryExample.class);
 
     public static int simpleTry() {
         return Try.of(TryExample::someWorkWithoutResult)
